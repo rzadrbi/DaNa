@@ -1,0 +1,137 @@
+{% load static %}
+<!doctype html>
+<html lang="zxx">
+
+<head>
+    <title>{% block title %} {% endblock %}</title>
+    {% include 'includes/head_refrences.html' %}
+</head>
+
+<body class="body-color">
+<div class="preloader">
+    <div class="spinner">
+        <div class="dot1"></div>
+        <div class="dot2"></div>
+    </div>
+</div>
+
+<!-- Top Header Start -->
+{% include 'includes/header_refrences.html' %}
+<!-- Top Header End -->
+
+<!-- Start Navbar Area -->
+{% include 'includes/NavBar_refrences.html' %}
+<!-- End Navbar Area -->
+{% csrf_token %}
+{% block content %}
+
+{% endblock %}
+
+<!-- Footer Area -->
+{% include 'includes/footer_refrences.html' %}
+<!-- Footer Area End -->
+
+<!-- QuickView Modal Area -->
+<div class="modal fade productsQuickView" id="productsQuickView" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true"><i class='bx bx-x'></i></span>
+            </button>
+
+            <div class="row">
+                <div class="col-lg-5 col-md-4">
+                    <div class="products-image"><img src="{% static 'images/products/shop-details-img1.png' %}"
+                                                     alt="Images"></div>
+                </div>
+
+                <div class="col-lg-7 col-md-8">
+                    <div class="product-content">
+                        <h3>خرس بزرگ تدی بر</h3>
+                        <div class="product-text">
+                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان
+                                گرافیک است. </p>
+                        </div>
+                        <div class="price-status">
+                            <div class="price">
+                                <span class="new-price">54100 تومان</span>
+                                <div class="rating">
+                                    <i class='bx bxs-star'></i>
+                                    <i class='bx bxs-star'></i>
+                                    <i class='bx bxs-star'></i>
+                                    <i class='bx bxs-star'></i>
+                                    <i class='bx bxs-star'></i>
+                                </div>
+                            </div>
+
+                            <div class="availability-status">
+                                <ul>
+                                    <li>موجودی: <span>موجود در انبار</span></li>
+                                    <li>تاریخ انقضا: <span>12 آذر, 1399</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="product-add-to-cart">
+                            <div class="input-counter">
+                                    <span class="minus-btn">
+                                        <i class='bx bx-minus'></i>
+                                    </span>
+                                <input type="text" value="1">
+                                <span class="plus-btn">
+                                        <i class='bx bx-plus'></i>
+                                    </span>
+                            </div>
+                            <button type="submit" class="default-btn btn-bg-three">
+                                افزودن به سبد خرید
+                            </button>
+
+                            <button type="submit" class="default-btn btn-bg-three">
+                                همین حالا بخرید
+                            </button>
+                        </div>
+
+                        <div class="advantage-list">
+                            <h3>جرییات فنی این محصول:</h3>
+                            <ul>
+                                <li>بسیار تازه و با کیفیت کامل</li>
+                                <li>این را از منبع طبیعی جمع آوری کنید</li>
+                                <li>دامنه اعتبار مناسبی داشته باشید</li>
+                                <li>تحویل رایگان خانه</li>
+                            </ul>
+                        </div>
+
+                        <div class="products-share">
+                            <ul class="social">
+                                <li><span>اشتراک:</span></li>
+                                <li>
+                                    <a href="#" class="facebook" target="_blank"><i class='bx bxl-facebook'></i></a>
+                                </li>
+                                <li>
+                                    <a href="#" class="twitter" target="_blank"><i class='bx bxl-twitter'></i></a>
+                                </li>
+                                <li>
+                                    <a href="#" class="linkedin" target="_blank"><i class='bx bxl-linkedin'></i></a>
+                                </li>
+                                <li>
+                                    <a href="#" class="instagram" target="_blank"><i
+                                            class='bx bxl-instagram'></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- QuickView Modal Area End -->
+
+
+<!-- Jquery Min JS -->
+<script src="{% static 'js/jquery.min.js' %}"></script>
+
+{% include 'includes/JS_refrences.html' %}
+</body>
+
+
+</html>
