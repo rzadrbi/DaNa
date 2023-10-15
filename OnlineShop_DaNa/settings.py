@@ -18,6 +18,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'admin_persian',
+    'admin_notification',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -28,7 +30,7 @@ INSTALLED_APPS = [
     # myapp
 
     'home.apps.HomeConfig',
-
+    'account.apps.AccountConfig',
 
 ]
 
@@ -94,9 +96,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'fa'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Tehran'
 
 USE_I18N = True
 
@@ -117,3 +119,9 @@ STATIC_ROOT = path.join(BASE_DIR, 'static')
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+NOTIFICATION_MODEL = 'home.Sample'  # Select the model you want to control, for example: "accounts.Message"
+
+# ADMIN_SITE_BASE_URL = 'admin_site_base_url/'  # default is "admin/
+
+AUTH_USER_MODEL = "account.User"
