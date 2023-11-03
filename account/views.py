@@ -80,3 +80,4 @@ class OTPview(View):
             return redirect("Home:main")
         message = 'Registration failed!'
         return render(request, self.template_name, context={'form': form, 'message': message})
+
