@@ -10,5 +10,6 @@ urlpatterns = [
     path('check/notification', check_notification_view, name="check_notifications"),
     path('', include('home.urls')),
     path('', include('account.urls')),
+    path('', include('product.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

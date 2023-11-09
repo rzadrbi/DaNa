@@ -3,7 +3,6 @@ from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 
 
-
 class UserManager(BaseUserManager):
     def create_user(self, phone, password=None):
         """
@@ -27,7 +26,7 @@ class UserManager(BaseUserManager):
         birth and password.
         """
         user = self.create_user(
-            phone,
+            phone=phone,
             password=password,
         )
         user.is_admin = True
@@ -82,5 +81,4 @@ class OTP(models.Model):
     phone = models.CharField(max_length=11)
     fullname = models.CharField(max_length=100)
     password = models.CharField(max_length=128)
-    random_code = models.IntegerField(max_length=4)
-
+    random_code = models.IntegerField()
