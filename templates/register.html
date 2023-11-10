@@ -1,6 +1,6 @@
 {% extends "master.html" %}
 {% load static %}
-{% block title %}ثبت نام{% endblock %}
+{% block title %}ثبت نام | Register{% endblock %}
 {% block content %}
     <!-- Inner Banner Area -->
     <div class="inner-banner-area">
@@ -36,7 +36,7 @@
                         <div class="user-content">
                             <h2>سلام</h2>
                             <p>در هر زمان به راحتی می توانید در حساب خود ثبت نام کنید.</p>
-                            <a href="log-in.html" class="user-btn">وارد شوید</a>
+                            <a href="{% url 'account:login' %}" class="user-btn">وارد شوید</a>
                         </div>
                     </div>
 

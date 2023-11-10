@@ -1,6 +1,6 @@
 {% extends 'master.html' %}
 {% load static %}
-{% block title %}ورود به حساب{% endblock %}
+{% block title %}ورود به حساب | Login{% endblock %}
 {% block content %}
     <!-- User Area -->
     <div class="user-area pt-100 pb-70">
@@ -11,7 +11,7 @@
                         <div class="user-content">
                             <h2>سلام</h2>
                             <p>شما به راحتی در هر زمانی میتوانید در سایت ما ثبت نام کنید</p>
-                            <a href="register.html" class="user-btn">ثبت نام</a>
+                            <a href="{% url 'account:register' %}" class="user-btn">ثبت نام</a>
                         </div>
                     </div>
 

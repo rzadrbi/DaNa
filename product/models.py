@@ -1,3 +1,6 @@
+import uuid
+
+import shortuuid
 from django.db import models
 from django.urls import reverse
 from django.utils.html import format_html
@@ -57,9 +60,11 @@ class Product(models.Model):
     title = models.CharField(max_length=100)
     cate = models.ManyToManyField(Category, related_name='categories')
     description = models.TextField()
+    information = models.TextField()
     slug = models.SlugField(blank=True, unique=True, verbose_name='اسلاگ')
     brand = models.ForeignKey(Brand, on_delete=models.DO_NOTHING, related_name='company', blank=True, null=True)
     color = models.ManyToManyField(Color, related_name='colors')
+    size = models.ManyToManyField(Size, blank=True, null=True, related_name='sizes')
     price = models.IntegerField()
     discount = models.IntegerField(blank=True, null=True)
     created_at = models.TimeField(auto_now_add=True)
@@ -92,6 +97,7 @@ class Image(models.Model):
 
     def show_image(self):
         return format_html(f'<img src="{self.img.url}" width="100px" height="52.25px">')
+
 
 
 class comment(models.Model):

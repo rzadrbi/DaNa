@@ -14,7 +14,7 @@ class PicInline(admin.TabularInline):
 
 
 @admin.register(models.Product)
-class ModelNameAdmin(admin.ModelAdmin):
+class ProductAdmin(admin.ModelAdmin):
     list_filter = ('cate', 'brand', 'color',)
     search_fields = ('title', '')
     list_display = ('title', 'brand',)
@@ -22,7 +22,7 @@ class ModelNameAdmin(admin.ModelAdmin):
 
 
 @admin.register(models.Category)
-class ModelNameAdmin(admin.ModelAdmin):
+class CategoryAdmin(admin.ModelAdmin):
     list_filter = ('title',)
 
 
@@ -32,6 +32,11 @@ class ModelNameAdmin(admin.ModelAdmin):
 
 
 @admin.register(models.Color)
+class ModelNameAdmin(admin.ModelAdmin):
+    list_filter = ('title',)
+
+
+@admin.register(models.Size)
 class ModelNameAdmin(admin.ModelAdmin):
     list_filter = ('title',)
 
@@ -46,3 +51,4 @@ class ModelNameAdmin(admin.ModelAdmin):
 class ModelNameAdmin(admin.ModelAdmin):
     list_filter = ('answered',)
     list_display = ('product', 'user')
+
