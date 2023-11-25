@@ -1,6 +1,8 @@
 import uuid
 
 import shortuuid
+from dj_shop_cart.cart import CartItem
+from dj_shop_cart.protocols import Numeric
 from django.db import models
 from django.urls import reverse
 from django.utils.html import format_html
@@ -78,6 +80,13 @@ class Product(models.Model):
         verbose_name = 'محصول'
         verbose_name_plural = 'محصولات'
 
+    def get_price(self, item: CartItem) -> Numeric:
+        """The only requirements of the dj_shop_cart package apart from the fact that the products you add
+                to the cart must be instances of django based models. You can use a different name for this method
+                but be sure to update the corresponding setting (see Configuration). Even if you change the name the
+                function signature should match this one.
+                """
+
     def get_absolute_url(self):  # TODO: set url
         return reverse('', args=[self.slug])
 
@@ -97,7 +106,6 @@ class Image(models.Model):
 
     def show_image(self):
         return format_html(f'<img src="{self.img.url}" width="100px" height="52.25px">')
-
 
 
 class comment(models.Model):
