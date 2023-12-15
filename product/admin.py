@@ -15,7 +15,7 @@ class PicInline(admin.TabularInline):
 
 @admin.register(models.Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_filter = ('cate', 'brand', 'color',)
+    list_filter = ('cate', 'brand')
     search_fields = ('title', '')
     list_display = ('title', 'brand',)
     inlines = (PicInline, )

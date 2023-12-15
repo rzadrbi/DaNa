@@ -1,11 +1,10 @@
 from django.views.decorators.http import require_POST
 from dj_shop_cart.cart import get_cart_class
-from django.http import HttpRequest
-from django.shortcuts import get_object_or_404
+from django.http import HttpRequest, HttpResponse
+from django.shortcuts import get_object_or_404, redirect
 from django.shortcuts import render
 from django.views import View
 from product.models import Product
-
 
 
 class CartView(View):
@@ -16,13 +15,28 @@ class CartView(View):
 Cart = get_cart_class()
 
 
-@require_POST
-def add_product(request: HttpRequest, product_id: int):
-    product = get_object_or_404(Product.objects.all(), pk=product_id)
-    quantity = int(request.POST.get("quantity"))
-    cart = Cart.new(request)
-    cart.add(product, quantity=quantity)
-    ...
+class add_to_cart(View):
+    def post(self, request: HttpRequest, pk):
+        product = get_object_or_404(Product, id=pk)
+        quantity = int(request.POST.get("quantity"))
+        color = request.POST.get("color")
+        size = request.POST.get("size")
+        cart = Cart.new(request)
+        cart.add(product, quantity=quantity)
+        print('kos')
+        print(cart)
+        return redirect('cart:cart_detail')
+
+
+# @require_POST
+# def add_product(request, product_id: int):
+#     product = get_object_or_404(Product.objects.all(), id=product_id)
+#     quantity = int(request.POST.get("quantity"))
+#     color = request.POST.get("color")
+#     size = request.POST.get("size")
+#     cart = Cart.new(request)
+#     cart.add(product, quantity=quantity, size=size, color= color)
+#     return redirect('cart:cart_detail')
 
 
 @require_POST
@@ -31,10 +45,8 @@ def remove_product(request: HttpRequest):
     quantity = int(request.POST.get("quantity"))
     cart = Cart.new(request)
     cart.remove(item_id=item_id, quantity=quantity)
-    ...
 
 
 @require_POST
 def empty_cart(request: HttpRequest):
     Cart.new(request).empty()
-    ...

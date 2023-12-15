@@ -1,3 +1,4 @@
+import requests
 from django.shortcuts import render
 from product.models import Product
 from django.views.generic import DetailView

@@ -32,11 +32,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-12">
-                    <div class="product-detls-image">
-                        {% for Pic in product.images.all %}
-                        	<img src="{{ Pic.img.url }}" alt="Image">
+                    <div class="offer-slider owl-carousel owl-theme">
+                        {% for Pimage in product.image_set.all %}
+                            <div class="product-detls-image">
+                                <img src="{{ Pimage.img.url }}" alt="product image">
+                            </div>
                         {% endfor %}
-                            <img src="{{ object.images.all }}" alt="Image">
                     </div>
                 </div>
 
@@ -61,57 +62,77 @@
                         <p>
                             {{ product.description }}
                         </p>
-
-                        <div class="input-count-area">
-                            <h3>تعداد</h3>
-                            <div class="input-counter">
-                                <span class="minus-btn"><i class='bx bx-minus'></i></span>
-                                <input type="text" name="quantity" min="0" value="1">
-                                <span class="plus-btn"><i class='bx bx-plus'></i></span>
+                        <form action="{% url 'cart:cart_add' product.id %}" method="post">
+                            {% csrf_token %}
+                            <div class="d-flex mb-3 product-desc">
+                                <h5>سایز :</h5>
+                                {% for item in product.size.all %}
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" class="custom-control-input" id="size-1" name="size">
+                                        <label class="custom-control-label" for="size-1">{{ item }}</label>
+                                    </div>
+                                {% endfor %}
                             </div>
-                        </div>
+                            <div class="d-flex mb-4">
+                                <h5>رنگ :</h5>
+                                {% for item in product.color.all %}
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" class="custom-control-input" id="color-1" name="color">
+                                        <label class="custom-control-label" for="color-1">{{ item }}</label>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <div class="input-count-area">
+                                <h3>تعداد</h3>
+                                <div class="input-counter">
+                                    <span class="minus-btn"><i class='bx bx-minus'></i></span>
+                                    <input type="text" name="quantity" min="1" value="1">
+                                    <span class="plus-btn"><i class='bx bx-plus'></i></span>
+                                </div>
+                            </div>
 
-                        <div class="product-add-btn">
-                            <button type="submit" class="default-btn btn-bg-three">
-                                <i class="fas fa-cart-plus"></i> خرید!
-                            </button>
-                            <button type="submit" class="default-btn btn-bg-three">
-                                <i class="fas fa-cart-plus"></i> افزودن به سبد خرید
-                            </button>
-                        </div>
+                            <div class="product-add-btn">
+                                <button type="submit" class="default-btn btn-bg-three">
+                                    <i class="fas fa-cart-plus"></i> خرید!
+                                </button>
+                                <button type="submit" class="default-btn btn-bg-three">
+                                    <i class="fas fa-cart-plus"></i> افزودن به سبد خرید
+                                </button>
+                        </form>
+                    </div>
 
-                        <div class="product-share">
-                            <ul>
-                                <li>
-                                    <span>اشتراک:</span>
-                                </li>
-                                <li>
-                                    <a href="#" target="_blank">
-                                        <i class='bx bxl-facebook'></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" target="_blank">
-                                        <i class='bx bxl-linkedin'></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" target="_blank">
-                                        <i class='bx bxl-twitter'></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" target="_blank">
-                                        <i class='bx bxl-instagram'></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
+                    <div class="product-share">
+                        <ul>
+                            <li>
+                                <span>اشتراک:</span>
+                            </li>
+                            <li>
+                                <a href="#" target="_blank">
+                                    <i class='bx bxl-facebook'></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" target="_blank">
+                                    <i class='bx bxl-linkedin'></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" target="_blank">
+                                    <i class='bx bxl-twitter'></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" target="_blank">
+                                    <i class='bx bxl-instagram'></i>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
     <!-- Product Details Area End -->
 
     <!-- Product Tab -->
@@ -146,10 +167,11 @@
                                     <div class="tabs_item current">
                                         <div class="products-tabs-decs">
                                             {{ product.information }}
-                                            {{ product.color }}
-                                            {{ product.size }}
-                                            {% for cm in product.comments.all %}
-                                                cm.body
+                                            <br>
+
+
+                                            {% for item in product.comment_set.all %}
+                                                {{ item.body }}
                                             {% endfor %}
                                         </div>
                                     </div>
@@ -167,11 +189,17 @@
                                                                 <span><i class='bx bx-calendar-event'></i> آذر 02, 1399,
                                                                     12:10 بعدازظهر </span>
                                                                 <p>
-                                                                    لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از
-                                                                    صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها
-                                                                    و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که
-                                                                    لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و
-                                                                    کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می
+                                                                    لورم ایپسوم متن ساختگی با تولید سادگی
+                                                                    نامفهوم از
+                                                                    صنعت چاپ و با استفاده از طراحان گرافیک است.
+                                                                    چاپگرها
+                                                                    و متون بلکه روزنامه و مجله در ستون و
+                                                                    سطرآنچنان
+                                                                    که
+                                                                    لازم است و برای شرایط فعلی تکنولوژی مورد
+                                                                    نیاز و
+                                                                    کاربردهای متنوع با هدف بهبود ابزارهای
+                                                                    کاربردی می
                                                                     باشد.
                                                                 </p>
                                                                 <div class="content">
@@ -187,11 +215,17 @@
                                                                 <span><i class='bx bx-calendar-event'></i> آذر 02, 1399,
                                                                     11:30 بعدازظهر </span>
                                                                 <p>
-                                                                    لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از
-                                                                    صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها
-                                                                    و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که
-                                                                    لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و
-                                                                    کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می
+                                                                    لورم ایپسوم متن ساختگی با تولید سادگی
+                                                                    نامفهوم از
+                                                                    صنعت چاپ و با استفاده از طراحان گرافیک است.
+                                                                    چاپگرها
+                                                                    و متون بلکه روزنامه و مجله در ستون و
+                                                                    سطرآنچنان
+                                                                    که
+                                                                    لازم است و برای شرایط فعلی تکنولوژی مورد
+                                                                    نیاز و
+                                                                    کاربردهای متنوع با هدف بهبود ابزارهای
+                                                                    کاربردی می
                                                                     باشد.
                                                                 </p>
                                                                 <div class="content">
@@ -207,7 +241,9 @@
                                                     <div class="reviews-form">
                                                         <div class="contact-form">
                                                             <h3>افزودن نظر</h3>
-                                                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ
+                                                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از
+                                                                صنعت
+                                                                چاپ
                                                                 و با استفاده از طراحان گرافیک است. </p>
                                                             <div class="rating">
                                                                 <i class='bx bxs-star'></i>
@@ -216,11 +252,12 @@
                                                                 <i class='bx bxs-star'></i>
                                                                 <i class='bx bxs-star-half'></i>
                                                             </div>
-                                                            <form id="contactForm">
+                                                            <div id="contactForm">
                                                                 <div class="row">
                                                                     <div class="col-lg-6 col-sm-6">
                                                                         <div class="form-group">
-                                                                            <input type="text" name="name" id="name"
+                                                                            <input type="text" name="name"
+                                                                                   id="name"
                                                                                    class="form-control" required
                                                                                    data-error="لطفا نام خود را وارد نمایید"
                                                                                    placeholder="نام*">
@@ -229,7 +266,8 @@
 
                                                                     <div class="col-lg-6 col-sm-6">
                                                                         <div class="form-group">
-                                                                            <input type="email" name="email_address"
+                                                                            <input type="email"
+                                                                                   name="email_address"
                                                                                    id="email_address" required
                                                                                    data-error="Please enter email address"
                                                                                    class="form-control"
@@ -254,7 +292,7 @@
                                                                         </button>
                                                                     </div>
                                                                 </div>
-                                                            </form>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -272,7 +310,8 @@
 
                                                 <li>
                                                     شماره تماس:
-                                                    <a href="tel:+1(123)-456-7890-3524">+1 (123) 456 7890 3524</a>
+                                                    <a href="tel:+1(123)-456-7890-3524">+1 (123) 456 7890
+                                                        3524</a>
                                                 </li>
 
                                                 <li>

@@ -64,9 +64,9 @@ class Product(models.Model):
     description = models.TextField()
     information = models.TextField()
     slug = models.SlugField(blank=True, unique=True, verbose_name='اسلاگ')
-    brand = models.ForeignKey(Brand, on_delete=models.DO_NOTHING, related_name='company', blank=True, null=True)
-    color = models.ManyToManyField(Color, related_name='colors')
-    size = models.ManyToManyField(Size, blank=True, null=True, related_name='sizes')
+    brand = models.ForeignKey(Brand, on_delete=models.DO_NOTHING, blank=True, null=True)
+    color = models.ManyToManyField(Color)
+    size = models.ManyToManyField(Size, blank=True, null=True)
     price = models.IntegerField()
     discount = models.IntegerField(blank=True, null=True)
     created_at = models.TimeField(auto_now_add=True)
@@ -98,7 +98,7 @@ class Product(models.Model):
 
 class Image(models.Model):
     img = models.ImageField(upload_to='img/product')
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = 'تصویر'
@@ -109,7 +109,7 @@ class Image(models.Model):
 
 
 class comment(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='comments', verbose_name='محصول')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='محصول')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments', verbose_name='کاربر')
     parent = models.ForeignKey('self', on_delete=models.CASCADE, related_name='replies', null=1, blank=1,
                                verbose_name='در جواب')
