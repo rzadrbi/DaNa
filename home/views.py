@@ -7,6 +7,4 @@ class Home(TemplateView):
 
     def get_context_data(self, **kwargs):
         contex = super(Home, self).get_context_data(**kwargs)
-        # self.request.session['my_name'] = "ayoubem khasiiiiiii ? "
-        print(self.request.session['my_name'])
         return contex

@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from account.forms import UserChangeForm, UserCreationForm
-from account.models import User
+from account.models import User, Address, ContactUs
 
 
 class UserAdmin(BaseUserAdmin):
@@ -41,3 +41,18 @@ admin.site.register(User, UserAdmin)
 # ... and, since we're not using Django's built-in permissions,
 # unregister the Group model from admin.
 admin.site.unregister(Group)
+
+
+@admin.register(Address)
+class AddressAdmin(admin.ModelAdmin):
+    list_display = ['user', 'full_name', 'email', 'phone', 'postal_code']
+    list_filter = ['user']
+    search_fields = ['full_name', 'email', 'phone']
+    raw_id_fields = ['user']
+
+
+@admin.register(ContactUs)
+class ContactUsAdmin(admin.ModelAdmin):
+    list_display = ['name', 'email', 'phone', 'subject']
+    list_filter = ['subject']
+    search_fields = ['name', 'subject']

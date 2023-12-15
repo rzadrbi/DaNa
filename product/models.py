@@ -65,7 +65,7 @@ class Product(models.Model):
     information = models.TextField()
     slug = models.SlugField(blank=True, unique=True, verbose_name='اسلاگ')
     brand = models.ForeignKey(Brand, on_delete=models.DO_NOTHING, blank=True, null=True)
-    color = models.ManyToManyField(Color)
+    color = models.ManyToManyField(Color, blank=True, null=True)
     size = models.ManyToManyField(Size, blank=True, null=True)
     price = models.IntegerField()
     discount = models.IntegerField(blank=True, null=True)
