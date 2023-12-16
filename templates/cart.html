@@ -52,19 +52,18 @@
                                     {% for item in cart %}
                                         <tr>
                                             <td class="product-thumbnail">
-                                                <a href="#">
-                                                    <img src="{{ item.product.image_set.all.url }}" alt="Image">
-                                                </a>
+                                                    <img src="{{ item.product.image_set.first.url }}"
+                                                         alt="{{ item.product.title | escape }}">
                                             </td>
 
                                             <td class="product-name">
-                                                <a href="#">{{ item.product.title }}</a>
+                                                <a href="{% url 'Product:detail' item.product.slug %}">{{ item.product.title }}</a>
                                             </td>
                                             <td class="product-name">
-                                                <a href="#">{{ item.color }}</a>
+                                                <span href="#">{{ item.color }}</span>
                                             </td>
                                             <td class="product-name">
-                                                <a href="#">{{ item.size }}</a>
+                                                <span href="#">{{ item.size }}</span>
                                             </td>
 
                                             <td class="product-price">
@@ -139,7 +138,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="کد تخفیف">
+                                            <input type="text" class="form-control" placeholder="کد تخفیف" >
                                         </div>
                                         <a href="#" class="default-btn btn-bg-three">
                                             اعمال تخفیف

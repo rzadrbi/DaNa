@@ -4,9 +4,10 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy, reverse
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.decorators.csrf import csrf_protect
 from django.views.generic import View, CreateView
-from account.forms import LoginForm, RegisterForm, OTPform
+from account.forms import LoginForm, RegisterForm, OTPform, AddressForm
 from account.models import User, OTP
 from uuid import uuid4
 
@@ -101,3 +102,22 @@ class OTPview(View):
 def signout(request):
     logout(request)
     return redirect('Home:main')
+
+
+class AddressView(LoginRequiredMixin, View):
+    def get(self, request):
+        form = AddressForm()
+        return render(request, 'add_address.html', {'form': form})
+
+    def post(self, request):
+        form = AddressForm(request.POST)
+        if form.is_valid():
+            new_address = form.save(commit=False)
+            new_address.user = request.user
+            new_address.save()
+            next_page = request.GET.get('next')
+            if next_page:
+                return redirect(next_page)
+            return redirect('Home:main')
+        return render(request, 'add_address.html', {'form': form})
+

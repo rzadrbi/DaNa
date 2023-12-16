@@ -1,0 +1,111 @@
+{% extends 'master.html' %}
+{% load static %}
+{% block title %} address | آدرس {% endblock %}
+{% load widget_tweaks %}
+{% block content %}
+    <!-- Inner Banner Area -->
+    <div class="inner-banner-area">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="inner-banner-content">
+                        <h2>آدرس پستی</h2>
+                        <ul>
+                            <li><a href="{% url 'Home:main' %}">خانه</a></li>
+                            <li><i class='bx bx-chevron-left'></i></li>
+                            <li><a href="{% url 'Home:main' %}" class="active">ادامه خرید</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="inner-banner-img">
+                        <img src="{% static 'images/inner-banner/icon_address.png' %}" alt="Inner Banner">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Inner Banner Area End -->
+
+    <!-- Checkout Area -->
+    <div class="checkout-area pt-100 pb-70">
+        <div class="container">
+            <div class="section-title text-center">
+                <h2>یک آدرس پستی برای خود تعریف کنید</h2>
+            </div>
+            <div class="section-title text-center">
+                <h3 style="color: darkred">در انتخاب ادرس دقت لازم را داشته باشید . مسئولیت صحت آدرس به عهده خریدار
+                    میباشد !</h3>
+            </div>
+            <div class="tabs_item current">
+                <div class="checkout-tab-item">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6">
+                            <div class="checkout-img">
+                                <img src="{% static 'images/delivery.png' %}" alt="Images">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <form method="post">
+                                {% csrf_token %}
+                                <div class="checkout-form">
+                                    <div class="contact-form">
+                                        <h2>جزییات اکانت</h2>
+                                        <form id="contactForm">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label>نام</label>
+                                                        {{ form.full_name|attr:"placeholder:نام و نام خانوادگی" }}
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label>آدرس ایمیل</label>
+                                                        {{ form.email|attr:"placeholder:آدرس ایمیل" }}
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label>کد پستی</label>
+                                                        {{ form.postal_code|attr:"placeholder:کدپستی" }}
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label>شماره تماس</label>
+                                                        {{ form.phone|attr:"placeholder:شماره تماس" }}
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-12">
+                                                    <div class="form-group">
+                                                        <label>آدرس کامل</label>
+                                                        {{ form.address|attr:"placeholder:آدرس کامل" }}
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-12 col-md-12">
+                                                    <button type="submit" class="default-btn btn-bg-three">
+                                                        ثبت آدرس !
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Checkout Area End -->
+        </div>
+    </div>
+{% endblock %}

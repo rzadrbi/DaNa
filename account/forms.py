@@ -5,7 +5,7 @@ from django.core import validators
 import re
 from django.core.exceptions import ValidationError
 
-from account.models import User
+from account.models import User, Address
 
 
 class UserCreationForm(forms.ModelForm):
@@ -105,3 +105,17 @@ class RegisterForm(forms.Form):
 
 class OTPform(forms.Form):
     randcode = forms.CharField(max_length=4, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'کد تایید ارسال شده به شماره موبایل خود را وارد کنید'}))
+
+
+class AddressForm(forms.ModelForm):
+    class Meta:
+        model = Address
+        exclude = ['user']
+        widgets = {
+            'full_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+            'phone': forms.TextInput(attrs={'class': 'form-control'}),
+            'address': forms.Textarea(attrs={'class': 'form-control'}),
+            'postal_code': forms.TextInput(attrs={'class': 'form-control'}),
+        }
+
