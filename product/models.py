@@ -66,7 +66,7 @@ class Product(models.Model):
     cate = models.ManyToManyField(Category, related_name='categories')
     description = models.TextField()
     information = models.TextField()
-    slug = models.SlugField(blank=True, unique=True, verbose_name='اسلاگ')
+    slug = models.SlugField(unique=True, verbose_name='اسلاگ')
     brand = models.ForeignKey(Brand, on_delete=models.DO_NOTHING, blank=True, null=True)
     color = models.ManyToManyField(Color, blank=True, null=True)
     size = models.ManyToManyField(Size, blank=True, null=True)
