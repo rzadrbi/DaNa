@@ -13,7 +13,9 @@ SECRET_KEY = 'django-insecure-c5(#m87pnccdbdof)=mrayivpq)pke&%)pjwl5+0o3m^h+n5x*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+
+LOGIN_URL = '/login'
 
 # Application definition
 
@@ -34,6 +36,7 @@ INSTALLED_APPS = [
     'product.apps.ProductConfig',
     'cart.apps.CartConfig',
     'widget_tweaks',
+    'django_render_partial',
 
 ]
 

@@ -11,6 +11,10 @@ class Order(models.Model):
     address = models.TextField(max_length=500, blank=True, null=True, verbose_name=_('address'))
     is_paid = models.BooleanField(default=False, verbose_name=_('پرداخت شده'))
     is_processed = models.BooleanField(default=False, verbose_name=_('پردازش شده'))
+    is_shipped = models.BooleanField(default=False, verbose_name=_('ارسال شده'))
+    use_discount = models.BooleanField(default=False, verbose_name=_('استفاده از کد تخفیف'))
+    discount_off = models.IntegerField(default=0, verbose_name=_('مقدار تخفیف اعمال شده'))
+    old_price = models.PositiveBigIntegerField(default=0, verbose_name=_('قیمت قبلی'))
     created = models.DateTimeField(auto_now_add=True, verbose_name=_('created'))
 
     class Meta:
@@ -25,6 +29,7 @@ class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items', verbose_name=_('order'))
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='items', verbose_name=_('product'))
     size = models.CharField(max_length=100, verbose_name=_('size'))
+    total = models.PositiveBigIntegerField(default=0, verbose_name=_('total'))
     color = models.CharField(max_length=100, verbose_name=_('color'))
     quantity = models.PositiveBigIntegerField(verbose_name=_('quantity'))
     price = models.PositiveBigIntegerField(verbose_name=_('price'))
@@ -34,7 +39,7 @@ class OrderItem(models.Model):
         verbose_name_plural = _('OrderItems')
 
     def __str__(self):
-        return self.order.user.phone_number
+        return self.order.user.phone
 
 
 class DiscountCode(models.Model):
@@ -48,3 +53,6 @@ class DiscountCode(models.Model):
 
     def __str__(self):
         return self.name
+
+
+

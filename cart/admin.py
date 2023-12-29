@@ -12,8 +12,8 @@ class OrderItemInline(admin.StackedInline):
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ['user', 'total_price', 'created', 'is_paid', 'is_processed']
-    list_filter = ['is_paid', 'created', 'is_processed']
+    list_display = ['user', 'total_price', 'created', 'is_paid', 'is_processed', 'is_shipped', 'use_discount']
+    list_filter = ['created', 'is_paid', 'is_processed', 'is_shipped', 'use_discount']
     search_fields = ['user']
     raw_id_fields = ['user']
     inlines = [OrderItemInline]

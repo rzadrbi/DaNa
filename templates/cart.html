@@ -19,7 +19,7 @@
 
                 <div class="col-lg-6">
                     <div class="inner-banner-img">
-                        <img src="assets/images/inner-banner/inner-banner3.png" alt="Inner Banner">
+                        <img src="{% static 'images/inner-banner/inner-banner3.png' %}" alt="Inner Banner">
                     </div>
                 </div>
             </div>
@@ -151,13 +151,13 @@
                                 <div class="cart-totals">
                                     <h3>جمع سبد خرید</h3>
                                     <ul>
-                                        <li>جمع کل <span>15000 تومان</span></li>
+                                        <li>جمع کل <span>{{ cart.total }} تومان</span></li>
                                         <li>ارسال<span>3000 تومان</span></li>
                                         <li>کد تخفیف<span>2000 تومان</span></li>
                                         <li>جمع <span><b>16000 تومان</b></span></li>
                                     </ul>
-                                    <a href="#" class="default-btn btn-bg-three">
-                                        ادامه خرید
+                                    <a href="{% url 'cart:order_create' %}" class="default-btn btn-bg-three">
+                                        ثبت سفارش و پرداخت
                                     </a>
                                 </div>
                             </div>

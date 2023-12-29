@@ -2,7 +2,7 @@ from random import randint
 from sms_ir import SmsIr
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.messages.views import SuccessMessageMixin
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.decorators.csrf import csrf_protect
@@ -10,6 +10,8 @@ from django.views.generic import View, CreateView
 from account.forms import LoginForm, RegisterForm, OTPform, AddressForm
 from account.models import User, OTP
 from uuid import uuid4
+
+from cart.models import DiscountCode, Order
 
 
 class LoginPageView(View):
@@ -32,6 +34,9 @@ class LoginPageView(View):
             )
             if user is not None:
                 login(request, user)
+                next_page = request.GET.get('next')
+                if next_page is not None:
+                    return redirect(next_page)
                 return redirect('Home:main')
         message = 'Login failed!'
         return render(request, self.template_name, context={'form': form, 'message': message})
@@ -120,4 +125,5 @@ class AddressView(LoginRequiredMixin, View):
                 return redirect(next_page)
             return redirect('Home:main')
         return render(request, 'add_address.html', {'form': form})
+
 

@@ -1,4 +1,3 @@
-
 (function ($) {
     'use strict';
 
@@ -11,8 +10,7 @@
     $(window).on('scroll', function () {
         if ($(this).scrollTop() > 150) {
             $('.navbar-area').addClass("sticky-nav");
-        }
-        else {
+        } else {
             $('.navbar-area').removeClass("sticky-nav");
         }
     });
@@ -186,7 +184,8 @@
                 toggleDefault: 'none'
             }
         });
-    } catch (err) { }
+    } catch (err) {
+    }
 
     // Tabs Single Page
     $('.tab ul.tabs').addClass('active').find('> li:eq(0)').addClass('current');
@@ -274,15 +273,24 @@
         var hours = Math.floor((timeLeft - (days * 86400)) / 3600);
         var minutes = Math.floor((timeLeft - (days * 86400) - (hours * 3600)) / 60);
         var seconds = Math.floor((timeLeft - (days * 86400) - (hours * 3600) - (minutes * 60)));
-        if (hours < "10") { hours = "0" + hours; }
-        if (minutes < "10") { minutes = "0" + minutes; }
-        if (seconds < "10") { seconds = "0" + seconds; }
+        if (hours < "10") {
+            hours = "0" + hours;
+        }
+        if (minutes < "10") {
+            minutes = "0" + minutes;
+        }
+        if (seconds < "10") {
+            seconds = "0" + seconds;
+        }
         $("#days").html(days + "<span>روز</span>");
         $("#hours").html(hours + "<span>ساعت</span>");
         $("#minutes").html(minutes + "<span>دقیقه</span>");
         $("#seconds").html(seconds + "<span>ثانیه</span>");
     }
-    setInterval(function () { makeTimer(); }, 300);
+
+    setInterval(function () {
+        makeTimer();
+    }, 300);
 
     // Subscribe form
     $(".newsletter-form").validator().on("submit", function (event) {
@@ -295,14 +303,15 @@
             event.preventDefault();
         }
     });
+
     function callbackFunction(resp) {
         if (resp.result === "success") {
             formSuccessSub();
-        }
-        else {
+        } else {
             formErrorSub();
         }
     }
+
     function formSuccessSub() {
         $(".newsletter-form")[0].reset();
         submitMSGSub(true, "Thank you for subscribing!");
@@ -310,12 +319,14 @@
             $("#validator-newsletter").addClass('hide');
         }, 4000)
     }
+
     function formErrorSub() {
         $(".newsletter-form").addClass("animated shake");
         setTimeout(function () {
             $(".newsletter-form").removeClass("animated shake");
         }, 1000)
     }
+
     function submitMSGSub(valid, msg) {
         if (valid) {
             var msgClasses = "validation-success";
@@ -324,7 +335,6 @@
         }
         $("#validator-newsletter").removeClass().addClass(msgClasses).text(msg);
     }
-
 
 
     // Preloader JS
@@ -362,3 +372,36 @@ function toggleTheme() {
         document.getElementById('slider').checked = true;
     }
 })();
+
+var sliderLeft = document.getElementById("slider0to50");
+var sliderRight = document.getElementById("slider51to100");
+var inputMin = document.getElementById("min");
+var inputMax = document.getElementById("max");
+
+///value updation from input to slider
+//function input update to slider
+function sliderLeftInput() {//input udate slider left
+    sliderLeft.value = inputMin.value;
+}
+
+function sliderRightInput() {//input update slider right
+    sliderRight.value = (inputMax.value);//chnage in input max updated in slider right
+}
+
+//calling function on change of inputs to update in slider
+inputMin.addEventListener("change", sliderLeftInput);
+inputMax.addEventListener("change", sliderRightInput);
+
+
+///value updation from slider to input
+//functions to update from slider to inputs
+function inputMinSliderLeft() {//slider update inputs
+    inputMin.value = sliderLeft.value;
+}
+
+function inputMaxSliderRight() {//slider update inputs
+    inputMax.value = sliderRight.value;
+}
+
+sliderLeft.addEventListener("change", inputMinSliderLeft);
+sliderRight.addEventListener("change", inputMaxSliderRight);

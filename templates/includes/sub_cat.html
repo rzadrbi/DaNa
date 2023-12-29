@@ -1,0 +1,9 @@
+<ul class="dropdown-menu">
+    {% for sub in item.children.all %}
+        <li class="nav-item">
+            <a href="shop-details.html" class="nav-link">
+                {{ sub.title }}
+            </a>
+        </li>
+    {% endfor %}
+</ul>

@@ -1,0 +1,24 @@
+{% extends 'master.html' %}
+{% block title %} صفحه یافت نشد | Page Not Found {% endblock %}
+{% load static %}
+{% block content %}
+<!-- Start 404 Error -->
+    <div class="error-area">
+        <div class="d-table">
+            <div class="d-table-cell">
+                <div class="container">
+                    <div class="error-content">
+                        <img src="{% static 'images/404-error.jpg' %}" alt="Image">
+                        <h3>اوه، این صفحه پیدا نشد</h3>
+                        <p>صفحه ای که به دنبال آن هستید ممکن است در صورت تغییر نام آن حذف شده باشد یا به طور موقت در
+                            دسترس نباشد.</p>
+                        <a href="{% url 'Home:main' %}" class="default-btn btn-bg-three">
+                            برگشت به صفحه خانه
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End 404 Error -->
+{% endblock %}

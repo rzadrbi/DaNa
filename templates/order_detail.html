@@ -1,0 +1,178 @@
+{% extends 'master.html' %}
+{% load static %}
+{% block title %} خرید نهایی | Order {% endblock %}
+{% block content %}
+
+    <div class="inner-banner-area">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="inner-banner-content">
+                        <h2>سبد خرید</h2>
+                        <ul>
+                            <li><a href="index-2.html">خانه</a></li>
+                            <li><i class='bx bx-chevron-left'></i></li>
+                            <li><a href="cart.html" class="active">سبد خرید</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="inner-banner-img">
+                        <img src="{% static 'images/inner-banner/inner-banner3.png' %}" alt="Inner Banner">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Inner Banner Area End -->
+
+    <!-- Start Cart Area -->
+    <section class="cart-wraps-area ptb-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="cart-wraps">
+                        <div class="cart-table table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th scope="col">محصول</th>
+                                    <th scope="col">نام</th>
+                                    <th scope="col">رنگ</th>
+                                    <th scope="col">سایز</th>
+                                    <th scope="col">قیمت واحد</th>
+                                    <th scope="col">تعداد</th>
+                                    <th scope="col">کل</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                {% for item in order.items.all %}
+                                    <tr>
+                                        <td class="product-thumbnail">
+                                            <img src="{{ item.product.image_set.first.url }}"
+                                                 alt="{{ item.product.title | escape }}">
+                                        </td>
+
+                                        <td class="product-name">
+                                            <a href="{% url 'Product:detail' item.product.slug %}">{{ item.product.title }}</a>
+                                        </td>
+                                        <td class="product-name">
+                                            <span href="#">{{ item.color }}</span>
+                                        </td>
+                                        <td class="product-name">
+                                            <span href="#">{{ item.size }}</span>
+                                        </td>
+
+                                        <td class="product-price">
+                                            <span class="unit-amount">{{ item.price }}</span>
+                                        </td>
+                                        <td class="product-quantity">
+                                            <span type="unit-amount"> {{ item.quantity }}</span>
+                                        </td>
+                                        <td class="product-subtotal">
+                                            <span class="subtotal-amount">{{ item.total }}</span>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    {% if request.user.addresses.all %}
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="cart-calc">
+                                    <div class="cart-wraps-form">
+                                        <h3>آدرس پستی</h3>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <select>
+                                                        {% for item in request.user.addresses.all %}
+                                                            <option value="">{{ item.address }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a href="{% url 'account:add_address_view' %}?next={% url 'cart:order_detail' order.id %}"
+                                           class="default-btn btn-bg-three">
+                                            اضافه کردن ادرس
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="cart-calc">
+                                    <div class="cart-wraps-form">
+                                        <h3>کد تخفیف</h3>
+                                        <form action="{% url 'cart:apply_discount' order.id %}" method="post">
+                                            {% csrf_token %}
+                                            <div class="form-group">
+                                                <input type="text" name="code" class="form-control"
+                                                       placeholder="کد تخفیف">
+                                            </div>
+                                            <button type="submit" class="default-btn btn-bg-three">
+                                                اعمال تخفیف
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            {% if order.use_discount %}
+                                <div class="col-lg-12">
+                                    <div class="cart-totals">
+                                        <h3>جمع سبد خرید</h3>
+                                        <ul>
+                                            <li>جمع کل <span>{{ order.old_price }} تومان</span></li>
+                                            <li>ارسال<span>3000 تومان</span></li>
+                                            <li>کد تخفیف<span>{{ order.discount_off }} تومان</span></li>
+                                            <li>جمع <span><b>{{ order.total_price }} تومان</b></span></li>
+                                        </ul>
+                                        <a href=""
+                                           class="default-btn btn-bg-three">
+                                            پرداخت
+                                        </a>
+                                    </div>
+                                </div>
+                                {% else %}
+                                <div class="col-lg-12">
+                                    <div class="cart-totals">
+                                        <h3>جمع سبد خرید</h3>
+                                        <ul>
+                                            <li>جمع کل <span>{{ order.total_price }} تومان</span></li>
+                                            <li>ارسال<span>3000 تومان</span></li>
+                                            <li>کد تخفیف<span>کد تخفیفی اعمال نشده</span></li>
+                                            <li>جمع <span><b>{{ order.total_price }} تومان</b></span></li>
+                                        </ul>
+                                        <a href=""
+                                           class="default-btn btn-bg-three">
+                                            پرداخت
+                                        </a>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% else %}
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="cart-calc">
+                                    <div class="cart-wraps-form text-center">
+                                        <h3>برای ادامه فرآیند خرید ابتدا باید یک آدرس پستی اضافه کنید !</h3>
+                                        <a href="{% url 'account:add_address_view' %}?next={% url 'cart:order_detail' order.id %}"
+                                           class="default-btn btn-bg-three">
+                                            اضافه کردن ادرس
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

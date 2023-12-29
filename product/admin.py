@@ -19,11 +19,14 @@ class ProductAdmin(admin.ModelAdmin):
     search_fields = ('title', '')
     list_display = ('title', 'brand',)
     inlines = (PicInline, )
+    prepopulated_fields = {'slug': ('title',)}
 
 
 @admin.register(models.Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_filter = ('title',)
+    list_filter = ('title', 'parent',)
+    list_display = ('title', 'parent',)
+    prepopulated_fields = {'slug': ('title',)}
 
 
 @admin.register(models.Brand)

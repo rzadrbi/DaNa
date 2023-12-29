@@ -4,6 +4,7 @@ import shortuuid
 from dj_shop_cart.cart import CartItem
 from dj_shop_cart.protocols import Numeric
 from django.db import models
+from django.db.models import ForeignKey
 from django.urls import reverse
 from django.utils.html import format_html
 from django.utils.text import slugify
@@ -11,7 +12,9 @@ from account.models import User
 
 
 class Category(models.Model):
+    parent = ForeignKey('self', on_delete=models.CASCADE, related_name='children', null=True, blank=True)
     title = models.CharField(max_length=100, unique=True)
+    slug = models.SlugField()
     created_at = models.TimeField(auto_now_add=True, )
 
     def __str__(self):
