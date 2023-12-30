@@ -23,9 +23,12 @@ class product_list(ListView):
     def get_context_data(self, **kwargs):
         request = self.request
         cate = request.GET.getlist('cate')
+        search = request.GET.get('search')
         min_price = request.GET.get('min_price')
         max_price = request.GET.get('max_price')
         queryset = Product.objects.all()
+        if search is not None:
+            queryset = queryset.objects.filter(title__icontains=search)
         if cate:
             queryset = queryset.filter(cate__title__in=cate).distinct()
         if min_price:
@@ -36,3 +39,5 @@ class product_list(ListView):
         context["object_list"] = queryset
         context["categories"] = Category.objects.all()
         return context
+
+
