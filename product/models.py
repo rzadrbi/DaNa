@@ -73,13 +73,14 @@ class Product(models.Model):
     price = models.IntegerField()
     discount = models.IntegerField(blank=True, null=True)
     created_at = models.TimeField(auto_now_add=True)
-    updated_at = models.TimeField(auto_now_add=True)
+    updated_at = models.TimeField(auto_now=True)
     amount = models.IntegerField()
 
     def __str__(self):
         return f'{self.title} --- {self.price}'
 
     class Meta:
+        ordering = ['-created_at']
         verbose_name = 'محصول'
         verbose_name_plural = 'محصولات'
 
