@@ -86,7 +86,7 @@ class OTP(models.Model):
 
 
 class Address(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='addresses', verbose_name=_('user'))
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='addresses', verbose_name=_('user'))
     full_name = models.CharField(max_length=100, verbose_name=_('full_name'))
     email = models.EmailField(max_length=100, verbose_name=_('email'))
     phone = models.CharField(max_length=11, verbose_name=_('phone_number'))

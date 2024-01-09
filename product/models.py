@@ -74,7 +74,8 @@ class Product(models.Model):
     discount = models.IntegerField(blank=True, null=True)
     created_at = models.TimeField(auto_now_add=True)
     updated_at = models.TimeField(auto_now=True)
-    amount = models.IntegerField()
+    amount = models.IntegerField(default=0)
+    view = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return f'{self.title} --- {self.price}'
@@ -91,8 +92,8 @@ class Product(models.Model):
                 function signature should match this one.
                 """
 
-    def get_absolute_url(self):  # TODO: set url
-        return reverse('', args=[self.slug])
+    def get_absolute_url(self):
+        return reverse(viewname='Product:detail', kwargs={'slug': self.slug})
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         self.slug = slugify(self.title)

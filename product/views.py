@@ -8,6 +8,13 @@ class ProductDetail(DetailView):
     template_name = "Product_Details.html"
     model = Product
 
+    def get(self, request, *args, **kwargs):
+        # override the get method
+        response = super().get(request, *args, **kwargs)  # call the original get method
+        self.object.view += 1  # increment the view count of the object
+        self.object.save()  # save the object
+        return response  # return the response
+
 
 class navbar(TemplateView):
     template_name = 'includes/NavBar_refrences.html'

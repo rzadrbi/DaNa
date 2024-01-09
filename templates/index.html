@@ -9,10 +9,11 @@
                 <div class="col-lg-4">
                     <div class="banner-content-area">
                         <div class="banner-content">
-                            <span>20UNH22U رولکس 1002 ، کد </span>
-                            <h1> اولکس ، بهترین راه برای خرید </h1>
-                            <p>این یکی از بهترین روش های مناسب و مناسب برای خرید محصول با قیمت مناسب و مناسب است.</p>
-                            <a href="shop-details.html" class="default-btn btn-bg-one border-radius-5">خرید</a>
+                            <span>{{ offer_product.brand }} </span>
+                            <h1> {{ offer_product.title }} </h1>
+                            <p>{{ offer_product.description }}</p>
+                            <a href="{{ offer_product.get_absolute_url }}"
+                               class="default-btn btn-bg-one border-radius-5">خرید</a>
                         </div>
                     </div>
                 </div>
@@ -20,10 +21,10 @@
                 <div class="col-lg-8">
                     <div class="banner-img-area">
                         <div class="banner-img">
-                            <img src="{% static 'images/home-one/home-one1.png' %}" alt="Images">
+                            <img src="{{ offer_product.image_set.all.first.img.url }}" alt="Images">
                             <div class="banner-offer-tag">
-                                <h3>60%</h3>
-                                <span>پیشنهاد</span>
+                                <h3>{{ offer_product.discount }}%</h3>
+                                <span>تخفیف</span>
                             </div>
                         </div>
                     </div>
@@ -400,211 +401,46 @@
                     </div>
 
                     <div class="row pt-45">
-                        <div class="col-lg-9">
-                            <div class="product-category-bg-card">
-                                <div class="content">
-                                    <span>این محصول را با قیمت پیشنهادی دریافت کنید</span>
-                                    <h3>بزرگترین پیشنهاد فروش فقط در تاریخ 30 آذر</h3>
-                                    <p>حداکثر 55٪ تخفبف</p>
-                                    <a href="#" class="default-btn border-radius-5 btn-bg-one">شروع کنید</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3 col-sm-6">
-                            <div class="product-category-card">
-                                <div class="product-category-img">
-                                    <a href="shop-details.html">
-                                        <img src="{% static 'images/products/product-img9.png' %}" alt="تصویر محصول">
-                                    </a>
-                                    <div class="new-tag">
-                                        <h3>جدید</h3>
-                                    </div>
-                                    <ul class="product-category-action">
-                                        <li>
-                                            <a href="#" data-tooltip="tooltip" data-placement="top"
-                                               title="افزودن در علاقه‌مندی‌ها"><i class='bx bx-heart'></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="#" data-tooltip="tooltip" data-placement="top" title="نمایش سریع"
-                                               data-toggle="modal" data-target="#productsQuickView">
-                                                <i class='bx bx-show-alt'></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                <div class="content">
-                                    <h3><a href="shop-details.html">تی-710 ایرفون</a></h3>
-                                    <span>کد محصول # 27PN10LU</span>
-                                    <div class="price-tag">
-                                        <h4>120 تومان
-                                            <del>140 تومان</del>
-                                        </h4>
+                        {% for item in arival_product %}
+                            <div class="col-lg-3 col-sm-6">
+                                <div class="product-category-card">
+                                    <div class="product-category-img">
+                                        <a href="{% url 'Product:detail' item.slug %}">
+                                            <img src="{{ item.image_set.all.first.img.url }}"
+                                                 alt="تصویر محصول">
+                                        </a>
+                                        <div class="new-tag">
+                                            <h3>جدید</h3>
+                                        </div>
+                                        <ul class="product-category-action">
+                                            <li>
+                                                <a href="#" data-tooltip="tooltip" data-placement="top"
+                                                   title="افزودن در علاقه‌مندی‌ها"><i class='bx bx-heart'></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-tooltip="tooltip" data-placement="top"
+                                                   title="نمایش سریع"
+                                                   data-toggle="modal" data-target="#productsQuickView">
+                                                    <i class='bx bx-show-alt'></i>
+                                                </a>
+                                            </li>
+                                        </ul>
                                     </div>
 
-                                    <div class="add-btn">
-                                        <a href="shop-details.html" class="add-cart-btn">خرید</a>
+                                    <div class="content">
+                                        <h3><a href="{% url 'Product:detail' item.slug %}">{{ item.title }}</a></h3>
+                                        <span>کد محصول # {{ item.id }}</span>
+                                        <div class="price-tag">
+                                            <h4>{{ item.price }}</h4>
+                                        </div>
+
+                                        <div class="add-btn">
+                                            <a href="{% url 'Product:detail' item.slug %}" class="add-cart-btn">خرید</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="col-lg-3 col-sm-6">
-                            <div class="product-category-card">
-                                <div class="product-category-img">
-                                    <a href="shop-details.html">
-                                        <img src="{% static 'images/products/product-img10.png' %}" alt="تصویر محصول">
-                                    </a>
-                                    <div class="new-tag">
-                                        <h3>جدید</h3>
-                                    </div>
-                                    <ul class="product-category-action">
-                                        <li>
-                                            <a href="#" data-tooltip="tooltip" data-placement="top"
-                                               title="افزودن در علاقه‌مندی‌ها"><i class='bx bx-heart'></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="#" data-tooltip="tooltip" data-placement="top" title="نمایش سریع"
-                                               data-toggle="modal" data-target="#productsQuickView">
-                                                <i class='bx bx-show-alt'></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                <div class="content">
-                                    <h3><a href="shop-details.html">ساعت هوشمند مشکی</a></h3>
-                                    <span>کد محصول # 67HN10LU</span>
-                                    <div class="price-tag">
-                                        <h4>100 تومان
-                                            <del>120 تومان</del>
-                                        </h4>
-                                    </div>
-
-                                    <div class="add-btn">
-                                        <a href="shop-details.html" class="add-cart-btn">خرید</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3 col-sm-6">
-                            <div class="product-category-card">
-                                <div class="product-category-img">
-                                    <a href="shop-details.html">
-                                        <img src="{% static 'images/products/product-img11.png' %}" alt="تصویر محصول">
-                                    </a>
-                                    <div class="new-tag">
-                                        <h3>جدید</h3>
-                                    </div>
-                                    <ul class="product-category-action">
-                                        <li>
-                                            <a href="#" data-tooltip="tooltip" data-placement="top"
-                                               title="افزودن در علاقه‌مندی‌ها"><i class='bx bx-heart'></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="#" data-tooltip="tooltip" data-placement="top" title="نمایش سریع"
-                                               data-toggle="modal" data-target="#productsQuickView">
-                                                <i class='bx bx-show-alt'></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                <div class="content">
-                                    <h3><a href="shop-details.html">سونی ایکس ایرفون</a></h3>
-                                    <span>کد محصول # 47PN20LU</span>
-                                    <div class="price-tag">
-                                        <h4>240 تومان
-                                            <del>270 تومان</del>
-                                        </h4>
-                                    </div>
-
-                                    <div class="add-btn">
-                                        <a href="shop-details.html" class="add-cart-btn">خرید</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3 col-sm-6">
-                            <div class="product-category-card">
-                                <div class="product-category-img">
-                                    <a href="shop-details.html">
-                                        <img src="{% static 'images/products/product-img12.png' %}" alt="تصویر محصول">
-                                    </a>
-                                    <div class="new-tag">
-                                        <h3>جدید</h3>
-                                    </div>
-                                    <ul class="product-category-action">
-                                        <li>
-                                            <a href="#" data-tooltip="tooltip" data-placement="top"
-                                               title="افزودن در علاقه‌مندی‌ها"><i class='bx bx-heart'></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="#" data-tooltip="tooltip" data-placement="top" title="نمایش سریع"
-                                               data-toggle="modal" data-target="#productsQuickView">
-                                                <i class='bx bx-show-alt'></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                <div class="content">
-                                    <h3><a href="shop-details.html">بریویل گیو بلندر</a></h3>
-                                    <span>کد محصول # 47GN10HU</span>
-                                    <div class="price-tag">
-                                        <h4>700 تومان
-                                            <del>800 تومان</del>
-                                        </h4>
-                                    </div>
-
-                                    <div class="add-btn">
-                                        <a href="shop-details.html" class="add-cart-btn">خرید</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3 col-sm-6 offset-lg-0 offset-sm-3">
-                            <div class="product-category-card">
-                                <div class="product-category-img">
-                                    <a href="shop-details.html">
-                                        <img src="{% static 'images/products/product-img13.png' %}" alt="تصویر محصول">
-                                    </a>
-                                    <div class="new-tag">
-                                        <h3>جدید</h3>
-                                    </div>
-                                    <ul class="product-category-action">
-                                        <li>
-                                            <a href="#" data-tooltip="tooltip" data-placement="top"
-                                               title="افزودن در علاقه‌مندی‌ها"><i class='bx bx-heart'></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="#" data-tooltip="tooltip" data-placement="top" title="نمایش سریع"
-                                               data-toggle="modal" data-target="#productsQuickView">
-                                                <i class='bx bx-show-alt'></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                <div class="content">
-                                    <h3><a href="shop-details.html">لنووو لپتاپ</a></h3>
-                                    <span>کد محصول # 47GN10HU</span>
-                                    <div class="price-tag">
-                                        <h4>1200 تومان
-                                            <del>1400 تومان</del>
-                                        </h4>
-                                    </div>
-
-                                    <div class="add-btn">
-                                        <a href="shop-details.html" class="add-cart-btn">خرید</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>

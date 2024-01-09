@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Order, OrderItem, DiscountCode
+from .models import Order, OrderItem, DiscountCode, shipping_cost
 
 
 class OrderItemInline(admin.StackedInline):
@@ -24,3 +24,9 @@ class DiscountCodeAdmin(admin.ModelAdmin):
     list_display = ['name', 'discount', 'quantity']
     list_filter = ['name']
     search_fields = ['name']
+
+
+@admin.register(shipping_cost)
+class ShippingCostAdmin(admin.ModelAdmin):
+    list_display = ['title', 'price']
+

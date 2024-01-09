@@ -16,6 +16,7 @@ class Order(models.Model):
     discount_off = models.IntegerField(default=0, verbose_name=_('مقدار تخفیف اعمال شده'))
     old_price = models.PositiveBigIntegerField(default=0, verbose_name=_('قیمت قبلی'))
     created = models.DateTimeField(auto_now_add=True, verbose_name=_('created'))
+    discount = models.PositiveSmallIntegerField(default=0, blank=True, null=True, verbose_name=_('تخفیف محصول'))
 
     class Meta:
         verbose_name = _('سفارش')
@@ -33,7 +34,7 @@ class OrderItem(models.Model):
     color = models.CharField(max_length=100, verbose_name=_('color'))
     quantity = models.PositiveBigIntegerField(verbose_name=_('quantity'))
     price = models.PositiveBigIntegerField(verbose_name=_('price'))
-
+    discount = models.PositiveSmallIntegerField(default=0, null=True, blank=True, verbose_name=_('تخفیف محصول'))
     class Meta:
         verbose_name = _('OrderItems')
         verbose_name_plural = _('OrderItems')
@@ -55,4 +56,13 @@ class DiscountCode(models.Model):
         return self.name
 
 
+class shipping_cost(models.Model):
+    title = models.CharField(max_length=100, verbose_name=_('روش پستی'))
+    price = models.PositiveBigIntegerField()
 
+    class Meta:
+        verbose_name = _('روش پست')
+        verbose_name_plural = _('روش های پستی')
+
+    def __str__(self):
+        return self.title

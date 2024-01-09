@@ -48,6 +48,66 @@
                         </div>
 
                         <div class="col-lg-6">
+                            {% if request.user.addresses %}
+                            <form method="post">
+                                {% csrf_token %}
+                                <div class="checkout-form">
+                                    <div class="contact-form">
+                                        <h2>جزییات اکانت</h2>
+                                        <form id="contactForm">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label>نام قبلی :</label>
+                                                        <span>{{ request.user.addresses.full_name }}</span>
+                                                        {{ form.full_name|attr:"placeholder:نام و نام خانوادگی جدید" }}
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label>آدرس ایمیل قبلی :</label>
+                                                        <span>{{ request.user.addresses.email }}</span>
+                                                        {{ form.email|attr:"placeholder:آدرس ایمیل جدید" }}
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label>کد پستی قبلی :</label>
+                                                        <span>{{ request.user.addresses.postal_code }}</span>
+                                                        {{ form.postal_code|attr:"placeholder:کدپستی جدید" }}
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label>شماره تماس قبلی :</label>
+                                                        <span>{{ request.user.addresses.phone }}</span>
+                                                        {{ form.phone|attr:"placeholder:شماره تماس جدید" }}
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-12">
+                                                    <div class="form-group">
+                                                        <label>آدرس کامل قبلی :</label>
+                                                        <span>{{ request.user.addresses.address }}</span>
+                                                        {{ form.address|attr:"placeholder:آدرس کامل جدید" }}
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-12 col-md-12">
+                                                    <button type="submit" class="default-btn btn-bg-three">
+                                                        ثبت آدرس !
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                            </form>
+                            {% else %}
                             <form method="post">
                                 {% csrf_token %}
                                 <div class="checkout-form">
@@ -101,6 +161,7 @@
                                 </div>
 
                             </form>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

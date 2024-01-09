@@ -6,7 +6,8 @@ from django.shortcuts import get_object_or_404, redirect
 from django.shortcuts import render
 from django.views import View
 
-from cart.models import Order, OrderItem, DiscountCode
+from account.models import Address
+from cart.models import Order, OrderItem, DiscountCode, shipping_cost
 from product.models import Product
 from cart.cart import Cart
 
@@ -14,15 +15,16 @@ from cart.cart import Cart
 class CartView(View):
     def get(self, request):
         cart = Cart(request)
-        return render(request, 'cart.html', context={'cart': cart})
+        ship = shipping_cost.objects.all()
+        return render(request, 'cart.html', context={'cart': cart, 'shipping': ship})
 
 
 class CartAddView(View):
     def post(self, request, id):
         product = get_object_or_404(Product, id=id)
-        size, color, quantity = request.POST.get('size', 'سایز بندی ندار'), request.POST.get('color',
-                                                                                             'رنگ بندی ندارد'), request.POST.get(
-            'quantity', 'empty')
+        size, color, quantity = (request.POST.get('size', 'سایز بندی ندار'), request.POST.get('color',
+                                                                                              'رنگ بندی ندارد'),
+                                 request.POST.get('quantity', 'empty'))
         cart = Cart(request)
         cart.add(product, quantity, color, size)
         return redirect('cart:cart_detail')
@@ -44,10 +46,22 @@ class OrderDetailView(LoginRequiredMixin, View):
 class OrderCreateView(LoginRequiredMixin, View):
     def get(self, request):
         cart = Cart(request)
-        order = Order.objects.create(user=request.user, total_price=int(cart.total()))
+        ship = shipping_cost.objects.get(id=1)
+        order = Order.objects.create(user=request.user, total_price=(int(cart.total()) + ship.price),
+                                     address=f'''{request.user.addresses.full_name} 
+                                                {request.user.addresses.phone}
+                                                {request.user.addresses.email}
+                                                {request.user.addresses.address}
+                                                {request.user.addresses.postal_code}'''
+                                     )
         for item in cart:
+            product = Product.objects.get(id=item['p_id'])
+            print(product)
             OrderItem.objects.create(order=order, product=item['product'], size=item['size'], color=item['color'],
-                                     quantity=item['quantity'], price=item['price'], total=item['total'])
+                                     quantity=item['quantity'], price=item['price'], total=item['total'],
+                                     discount=item['discount'],)
+            product.amount -= int(item['quantity'])
+            product.save()
         cart.remove_cart()
         return redirect('cart:order_detail', order.id)
 
@@ -69,3 +83,5 @@ class ApplyDiscountView(LoginRequiredMixin, View):
         discount_code.quantity -= 1
         discount_code.save()
         return redirect('cart:order_detail', order.id)
+
+

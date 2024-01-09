@@ -6,9 +6,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.decorators.csrf import csrf_protect
-from django.views.generic import View, CreateView
+from django.views.generic import View, CreateView, UpdateView
 from account.forms import LoginForm, RegisterForm, OTPform, AddressForm
-from account.models import User, OTP
+from account.models import User, OTP, Address
 from uuid import uuid4
 
 from cart.models import DiscountCode, Order
@@ -126,4 +126,20 @@ class AddressView(LoginRequiredMixin, View):
             return redirect('Home:main')
         return render(request, 'add_address.html', {'form': form})
 
+
+def Update_Address(request):
+    address = get_object_or_404(Address, user=request.user)
+    if request.method == 'POST':
+        form = AddressForm(data=request.POST)
+        if form.is_valid():
+            address.full_name = form.cleaned_data['full_name']
+            address.email = form.cleaned_data['email']
+            address.phone = form.cleaned_data['phone']
+            address.address = form.cleaned_data['address']
+            address.postal_code = form.cleaned_data['postal_code']
+            address.save()
+            return redirect('Home:main')
+    else:
+        form = AddressForm
+    return render(request, 'add_address.html', {'form': form, })
 
