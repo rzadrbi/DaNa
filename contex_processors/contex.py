@@ -13,3 +13,4 @@ def CatSearch(request):
 def shipping_costs(request):
     shipping_costs = shipping_costs.objects.all()
     return {'shipping_costs': shipping_costs}
+
