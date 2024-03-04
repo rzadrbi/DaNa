@@ -140,3 +140,4 @@ NOTIFICATION_MODEL = 'home.Sample'  # Select the model you want to control, for 
 # ADMIN_SITE_BASE_URL = 'admin_site_base_url/'  # default is "admin/
 
 AUTH_USER_MODEL = "account.User"
+
