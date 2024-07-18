@@ -1,6 +1,3 @@
-import uuid
-
-import shortuuid
 from dj_shop_cart.cart import CartItem
 from dj_shop_cart.protocols import Numeric
 from django.db import models
