@@ -65,7 +65,7 @@ class Register(View):
                 linenumber=30007732904886,
             )
             sms_ir.send_verify_code(
-                number="+989133820954",
+                number=f"{cd['phone']}",
                 template_id=244376,
                 parameters=[{"name": "param", "value": rcode, }, ],
             )
@@ -142,4 +142,15 @@ def Update_Address(request):
     else:
         form = AddressForm
     return render(request, 'add_address.html', {'form': form, })
+
+
+# def my_account(request):
+#     return render(request, 'my_account.html', {})
+
+class my_account(View):
+    template_name = 'my_account.html'
+
+    def get(self, request):
+        return render(request, self.template_name, )
+
 

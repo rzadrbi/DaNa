@@ -1,0 +1,248 @@
+{% extends "master.html" %}
+{% load static %}
+{% block title %}ثبت نام | Register{% endblock %}
+{% block content %}
+    <!-- Inner Banner Area -->
+    <div class="inner-banner-area">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="inner-banner-content">
+                        <h2>اکانت من </h2>
+                        <ul>
+                            <li><a href="index-2.html">خانه</a></li>
+                            <li><i class='bx bx-chevron-left'></i></li>
+                            <li><a href="my-account.html" class="active">اکانت من</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="inner-banner-img">
+                        <img src="assets/images/inner-banner/inner-banner5.png" alt="Inner Banner">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Inner Banner Area End -->
+
+    <!-- اکانت من Area -->
+    <div class="my-account-area ptb-100">
+        <div class="container">
+            <div class="tab account-tab">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <ul class="tabs">
+                            <li>
+                                <a href="#">
+                                    اکانت من
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    سفارشات من
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    آدرس
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    خروج
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-8">
+                        <div class="tab_content current active">
+                            <div class="tabs_item current">
+                                <div class="account-tab-item">
+                                    <div class="account-details">
+                                        <h2>جزییا پروفایل</h2>
+                                        <div class="account-profile">
+                                            <div class="account-profile-img">
+                                                <img src="assets/images/products/product-profile1.jpg" alt="Images">
+                                            </div>
+                                            <ul>
+                                                <li><a href="#">آپلود</a></li>
+                                                <li><a href="#">حذف</a></li>
+                                            </ul>
+                                        </div>
+
+                                        <div class="account-form">
+                                            <form>
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" placeholder="مگان">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" placeholder="فاکس">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <input type="email" class="form-control"
+                                                                placeholder="megan@hello.com">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control"
+                                                                placeholder="+501-529-1747">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                        <div class="account-form">
+                                            <h3>تغییر رمزعبور</h3>
+                                            <form>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <input type="password" class="form-control"
+                                                                placeholder="رمزعبور فعلی">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <input type="password" class="form-control"
+                                                                placeholder="رمزعبور جدید">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <input type="password" class="form-control"
+                                                                placeholder="تایید رمزعبور">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-4 col-md-6">
+                                                        <button type="submit" class="default-btn btn-bg-three">
+                                                            تایید
+                                                        </button>
+                                                    </div>
+
+                                                    <div class="col-lg-8 col-md-6">
+                                                        <button type="submit" class="default-btn btn-bg-three">
+                                                            لغو
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tabs_item">
+                                <div class="account-tab-item">
+                                    <div class="checkout-order">
+                                        <h2>سفارشات من</h2>
+                                        <h3 class="title-item">توضیحات و مبلغ مورد <span> پول نقد </span></h3>
+                                        <ul class="checkout-product">
+                                            <li>
+                                                <img src="assets/images/products/propular-style8.png" alt="Images">
+                                                <h3>پیاز محلی</h3>
+                                                <span>20 تومان</span>
+                                                <div class="price-tag">180 تومان</div>
+                                            </li>
+
+                                            <li>
+                                                <img src="assets/images/products/propular-style4.png" alt="Images">
+                                                <h3>شکلات پروتئینی</h3>
+                                                <span>250 تومان</span>
+                                                <div class="price-tag">2250 تومان</div>
+                                            </li>
+                                        </ul>
+
+                                        <div class="total-amount">
+                                            <h2 class="amount-title">زیرمبلغ کل <span>2430 تومان</span></h2>
+                                            <h3 class="vat-title">مالیات (5%) <span>120 تومان</span></h3>
+                                            <h3 class="total-title">مقدار کل<span>2550 تومان</span></h3>
+                                        </div>
+
+                                        <div class="amount-btn">
+                                            <a href="#" class="default-btn btn-bg-three">بعدی</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tabs_item">
+                                <div class="account-tab-item">
+                                    <div class="address-details">
+                                        <h2>آدرس من <a href="#" class="address-edit">ویرایش</a></h2>
+                                        <p>نیوجرسی</p>
+                                        <span>2873 یورک شایر سیرکل ، کارولینا</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tabs_item">
+                                <div class="account-tab-item">
+                                    <div class="address-details">
+                                        <div class="user-form">
+                                            <h2>ورود</h2>
+                                            <form>
+                                                <div class="row">
+                                                    <div class="col-lg-12 ">
+                                                        <div class="form-group">
+                                                            <i class='bx bx-user'></i>
+                                                            <input type="text" class="form-control" required
+                                                                data-error="لطفا نام کاربری یا ایمیل خود را وارد نمایید"
+                                                                placeholder="ایمیل یا نام کاربری ">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-12">
+                                                        <div class="form-group">
+                                                            <i class='bx bx-lock'></i>
+                                                            <input class="form-control" type="password" name="password"
+                                                                placeholder="رمزعبور">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-12 form-condition">
+                                                        <div class="agree-label">
+                                                            <input type="checkbox" id="chb1">
+                                                            <label for="chb1">
+                                                                مرا به خاطر بسپار<a class="forget"
+                                                                    href="forget-password.html">فراموشی رمز عبور؟</a>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-12 ">
+                                                        <button type="submit" class="default-btn btn-bg-three">
+                                                            ورود
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- اکانت من Area End -->
+
+{% endblock %}
