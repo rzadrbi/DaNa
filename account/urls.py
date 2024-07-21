@@ -11,4 +11,5 @@ urlpatterns = [
     path('create_address', views.AddressView.as_view(), name='add_address_view'),
     path('update_address', views.Update_Address, name='update_address_view'),
     path('my_account', views.my_account.as_view(), name='my_account'),
+    path('contact_us', views.contact_us.as_view(), name='contact_us'),
 ]

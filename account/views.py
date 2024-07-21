@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.decorators.csrf import csrf_protect
-from django.views.generic import View, CreateView, UpdateView
+from django.views.generic import View, CreateView, UpdateView, TemplateView
 from account.forms import LoginForm, RegisterForm, OTPform, AddressForm
 from account.models import User, OTP, Address
 from uuid import uuid4
@@ -154,3 +154,5 @@ class my_account(View):
         return render(request, self.template_name, )
 
 
+class contact_us(TemplateView):
+    template_name = 'contact_us.html'
