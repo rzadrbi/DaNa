@@ -10,9 +10,9 @@
                     <div class="inner-banner-content">
                         <h2>ارتباط با ما</h2>
                         <ul>
-                            <li><a href="index-2.html">خانه</a></li>
+                            <li><a href="{% url 'Home:main' %}">خانه</a></li>
                             <li><i class='bx bx-chevron-left'></i></li>
-                            <li><a href="contact.html" class="active">ارتباط با ما</a></li>
+                            <li><a href="{% url 'account:contact_us' %}" class="active">ارتباط با ما</a></li>
                         </ul>
                     </div>
                 </div>
