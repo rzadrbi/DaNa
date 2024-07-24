@@ -10,9 +10,9 @@
                     <div class="inner-banner-content">
                         <h2>اکانت من </h2>
                         <ul>
-                            <li><a href="{%  %}">خانه</a></li>
+                            <li><a href="{% url 'Home:main' %}">خانه</a></li>
                             <li><i class='bx bx-chevron-left'></i></li>
-                            <li><a href="my-account.html" class="active">اکانت من</a></li>
+                            <li><a href="{% url 'account:my_account' %}" class="active">اکانت من</a></li>
                         </ul>
                     </div>
                 </div>
