@@ -7,7 +7,7 @@ from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.decorators.csrf import csrf_protect
 from django.views.generic import View, CreateView, UpdateView, TemplateView
-from account.forms import LoginForm, RegisterForm, OTPform, AddressForm
+from account.forms import LoginForm, RegisterForm, OTPform, AddressForm, contactusForm
 from account.models import User, OTP, Address
 from uuid import uuid4
 
@@ -154,5 +154,9 @@ class my_account(View):
         return render(request, self.template_name, )
 
 
-class contact_us(TemplateView):
+class contact_us(View):
     template_name = 'contact_us.html'
+
+    def get(self, request):
+        form = contactusForm
+        return render(request, self.template_name, {'form': form, })

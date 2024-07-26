@@ -5,7 +5,7 @@ from django.core import validators
 import re
 from django.core.exceptions import ValidationError
 
-from account.models import User, Address
+from account.models import User, Address, ContactUs
 
 
 class UserCreationForm(forms.ModelForm):
@@ -75,7 +75,8 @@ class RegisterForm(forms.Form):
     phone = forms.CharField(max_length=11,
                             widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'شماره موبایل'}),
                             validators=[validators.MaxLengthValidator(11)])
-    fullname = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'نام و نام خانوادگی'}))
+    fullname = forms.CharField(
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'نام و نام خانوادگی'}))
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'گذرواژه'}))
     password2 = forms.CharField(
         widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'تکرار گذرواژه'}))
@@ -85,7 +86,7 @@ class RegisterForm(forms.Form):
         password1 = self.cleaned_data.get("password")
         password2 = self.cleaned_data.get("password2")
         if password1 and password2 and password1 != password2:
-            raise ValidationError("گذرواژه ها برابر نیستند !", code= 'not_same_pass')
+            raise ValidationError("گذرواژه ها برابر نیستند !", code='not_same_pass')
         if len(password1) < 8:
             raise ValidationError('طول گذرواژه نباید کمتر از ۸ کاراکتر باشد !', code='pass_len')
         if str(password1).isnumeric() or not bool(re.search("\d", password1)):
@@ -104,7 +105,8 @@ class RegisterForm(forms.Form):
 
 
 class OTPform(forms.Form):
-    randcode = forms.CharField(max_length=4, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'کد تایید ارسال شده به شماره موبایل خود را وارد کنید'}))
+    randcode = forms.CharField(max_length=4, widget=forms.TextInput(
+        attrs={'class': 'form-control', 'placeholder': 'کد تایید ارسال شده به شماره موبایل خود را وارد کنید'}))
 
 
 class AddressForm(forms.ModelForm):
@@ -119,3 +121,15 @@ class AddressForm(forms.ModelForm):
             'postal_code': forms.TextInput(attrs={'class': 'form-control'}),
         }
 
+
+class contactusForm(forms.ModelForm):
+    class Meta:
+        model = ContactUs
+        exclude = ['created']
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.TextInput(attrs={'class': 'form-control'}),
+            'phone': forms.TextInput(attrs={'class': 'form-control'}),
+            'message': forms.TextInput(attrs={'class': 'form-control'}),
+            'subject': forms.TextInput(attrs={'class': 'form-control'}),
+        }
