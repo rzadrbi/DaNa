@@ -93,11 +93,13 @@
                                                 مقایسه
                                             </a>
                                         </li>
-                                        <li class="nav-item">
-                                            <a href="cart.html" class="nav-link">
+                                        {% if request.user.cart  %}
+                                            <li class="nav-item">
+                                            <a href="{% url 'cart:cart_detail' %}" class="nav-link">
                                                 سبد خرید
                                             </a>
                                         </li>
+                                        {% endif %}
                                         <li class="nav-item">
                                             <a href="checkout.html" class="nav-link">
                                                 ادامه خرید
