@@ -1,3 +1,9 @@
 from django.contrib import admin
+from home.models import contact_phone
 
-# Register your models here.
+
+@admin.register(contact_phone)
+class contact_phoneAdmin(admin.ModelAdmin):
+    list_display = ('phone', )
+
+
