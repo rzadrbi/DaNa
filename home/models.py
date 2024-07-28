@@ -2,7 +2,7 @@ from django.db import models
 
 
 class contact_phone(models.Model):
-    phone = models.IntegerField(max_length=11, verbose_name='شماره ارتباط با ما')
+    phone = models.CharField(max_length=11, verbose_name='شماره ارتباط با ما')
 
     def __str__(self):
         return self.phone
