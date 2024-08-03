@@ -160,3 +160,5 @@ class contact_us(View):
     def get(self, request):
         form = contactusForm
         return render(request, self.template_name, {'form': form, })
+
+
