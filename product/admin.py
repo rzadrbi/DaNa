@@ -54,3 +54,5 @@ class ModelNameAdmin(admin.ModelAdmin):
     list_filter = ('answered',)
     list_display = ('product', 'user')
 
+
+
