@@ -56,3 +56,5 @@ class ContactUsAdmin(admin.ModelAdmin):
     list_display = ['name', 'email', 'phone', 'subject']
     list_filter = ['subject']
     search_fields = ['name', 'subject']
+
+
