@@ -12,6 +12,8 @@ class contact_phone(models.Model):
         verbose_name_plural = 'شماره های تماس'
 
 
+
+
 class sample(models.Model):
     pass
 
