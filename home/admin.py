@@ -7,3 +7,5 @@ class contact_phoneAdmin(admin.ModelAdmin):
     list_display = ('phone', )
 
 
+
+
